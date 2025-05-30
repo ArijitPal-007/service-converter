@@ -1,0 +1,166 @@
+import React from "react";
+import "./Service.css";
+import curriculum from "../../assets/curriculum-vitae.png";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+function Service() {
+  const url = "https://aiml-document-analyser.reca.ai/document/parse-cv/v2";
+  const url2 = "https://development.digisherpa.ai/document/info/parse-batch-of-resume";
+  const url3 = "https://aiml-document-analyser.reca.ai/document/document-classification"
+
+  const [file, setFile] = useState(null);
+  const [file2, setFile2] = useState(null);
+  const [file3, setFile3] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
+  const navigate = useNavigate();
+
+  const handleUpload = async (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleUpload2 = async (event) => {
+    setFile2(event.target.files[0]);
+  };
+  const handleUpload3 = async (event) => {
+    setFile3(event.target.files[0]);
+  };
+
+  const handleClick = async () => {
+    if (!file) {
+      console.error("No file selected");
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      const formData = new FormData();
+      formData.append("document", file);
+
+      const response = await axios.post(url, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      localStorage.setItem("cvData", JSON.stringify(response.data));
+      navigate("/cv-details");
+      console.log("CV parsed successfully", response.data);
+    } catch (error) {
+      console.error("Error parsing CV:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+
+  //service
+  const handleservice2 = async () => {
+    if (!file2) {
+      console.error("No file selected");
+      return;
+    }
+
+    try {
+      setIsLoading2(true);
+      const formData = new FormData();
+      formData.append("documents", file2);
+
+      const response = await axios.post(url2, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "Basic ZGlnaXNoZXJwYToxMjNlZGMjRURD",
+        },
+      });
+      console.log("Service 2 response:", response.data.data[0]);
+      
+      // Store the response data in localStorage
+      localStorage.setItem("cvData2", JSON.stringify(response.data));
+      
+      // Navigate to CV details page
+      navigate("/cv-details2");
+    } catch (error) {
+      console.error("Service 2 upload error:", error);
+    } finally {
+      setIsLoading2(false);
+    }
+  };
+
+
+  //service3
+  const handleAadhar = async ()=>{
+    if (!file3) {
+      console.error("No file selected");
+      return;
+    }
+    try {
+      setIsLoading2(true);
+      const formData = new FormData();
+      formData.append("file", file3);
+
+      const response = await axios.post(url3, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          
+        },
+      });
+      console.log("Service 3 response:", response.data);
+      
+      // Store the response data in localStorage
+      localStorage.setItem("aadhar", JSON.stringify(response.data));
+      
+      
+      navigate("/aadhar-details");
+    } catch (error) {
+      console.error("service 3 upload error",error);
+    }finally {
+      setIsLoading2(false);
+    }
+  }
+
+  return (
+    <div className="main-container">
+      {isLoading && (
+        <div className="loader-overlay">
+          <div className="loader"></div>
+          <p>Processing your CV...</p>
+        </div>
+      )}
+      {isLoading2 && (
+        <div className="loader-overlay">
+          <div className="loader"></div>
+          <p>Processing document...</p>
+        </div>
+      )}
+
+      <div className="upload-card">
+        <h3>Service 1</h3>
+        <input type="file" onChange={handleUpload} />
+        <button onClick={handleClick} disabled={isLoading}>
+          {isLoading ? "Processing..." : "Upload CV"}
+        </button>
+      </div>
+
+      <div className="upload-card">
+        <h3>Service 2</h3>
+        <input type="file" onChange={handleUpload2} />
+        <button onClick={handleservice2} disabled={isLoading2}>
+          {isLoading2 ? "Processing..." : "Upload Document"}
+        </button>
+      </div>
+      <div className="upload-card">
+        <h3>upload Aadhar</h3>
+        <input type="file" onChange={handleUpload3} />
+        <button onClick={handleAadhar} disabled={isLoading2}>
+          {isLoading2 ? "Processing..." : "Upload Document"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Service;

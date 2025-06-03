@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./CvDetailsTwo.css";
+// import "./CvDetailsTwo.css";
 
 function CvDetailsTwo() {
   const [cvData2, setCvData2] = useState(null);

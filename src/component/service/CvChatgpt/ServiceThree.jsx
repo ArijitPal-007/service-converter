@@ -1,10 +1,10 @@
 import React from 'react'
 import axios from "axios";
 import { useState } from "react";
-import curriculum from "../../assets/curriculum-vitae.png";
+import curriculum from "../../../assets/curriculum-vitae.png";
+import CvDetailsTwo from "../../cv-details/cvtwo/CvDetilsTwo/";
 
-import "./Service.css";
-import CvDetailsTwo from '../cv-details/cvtwo/CvdetilsTwo';
+// import "./Service.css";
 
 function ServiceThree() {
     const url = "https://development.digisherpa.ai/document/info/parse-batch-of-resume";

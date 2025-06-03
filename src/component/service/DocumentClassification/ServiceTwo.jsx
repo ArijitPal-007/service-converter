@@ -1,21 +1,28 @@
 import React from "react";
-import "./Service.css";
-import curriculum from "../../assets/curriculum-vitae.png";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useState } from "react";
-import CvDetails from "../cv-details/cvone/CvDetails";
+import "./ServiceTwo.css";
 
-function Service() {
-  const url = "https://aiml-document-analyser.reca.ai/document/parse-cv/v2";
+function ServiceTwo() {
+  useEffect(() => {
+    // Add Font Awesome CDN
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href =
+      "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css";
+    document.head.appendChild(link);
+  }, []);
+
+  const url =
+    "https://aiml-document-analyser.reca.ai/document/document-classification";
   const [file, setFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [cvDetails, setCvDetails] = useState(null);
-  // const navigate = useNavigate();
+  const [aadhar, setAadhar] = useState(null);
+  // const [cvDetails, setCvDetails] = useState(null);
 
   const handleUpload = async (event) => {
     setFile(event.target.files[0]);
   };
-
   const handleClick = async () => {
     console.log("file", file);
 
@@ -27,7 +34,7 @@ function Service() {
     try {
       setIsLoading(true);
       const formData = new FormData();
-      formData.append("document", file);
+      formData.append("file", file);
 
       const response = await axios.post(url, formData, {
         headers: {
@@ -37,34 +44,35 @@ function Service() {
       console.log("response", response);
 
       // Store the response data in localStorage
-      localStorage.setItem("cvData", JSON.stringify(response.data));
-      setCvDetails(response.data);
+      localStorage.setItem("aadhar", JSON.stringify(response.data));
+      setAadhar(response.data);
 
-      console.log("CV parsed successfully", response.data);
+      console.log("aadhar parsed successfully", response.data);
     } catch (error) {
       console.error("Error parsing CV:", error);
     } finally {
       setIsLoading(false);
     }
   };
-
   return (
     <div className="main-container">
       {isLoading && (
         <div className="loader-overlay">
           <div className="loader"></div>
-          <p>Processing your CV...</p>
+          <p>Processing your Aadhar...</p>
         </div>
       )}
       <div className="service-container">
         <div className="upload-section">
-          <h2>Upload CV</h2>
+          <h2>Upload Document</h2>
           <div className="upload-card">
             <div className="upload-content">
-              <img src={curriculum} alt="CV Upload" className="upload-icon" />
+              <div className="document-icon">
+                <i className="fas fa-file-alt"></i>
+              </div>
               <input
                 type="file"
-                accept=".pdf,.doc,.docx"
+                accept=".pdf,.jpg,.jpeg,.png"
                 onChange={handleUpload}
                 className="file-input"
               />
@@ -73,23 +81,27 @@ function Service() {
                 disabled={isLoading}
                 className="upload-button"
               >
-                {isLoading ? "Processing..." : "Upload CV"}
+                {isLoading ? "Processing..." : "Upload Document"}
               </button>
             </div>
           </div>
         </div>
 
         <div className="details-section">
-          <h2>CV Details</h2>
-          {cvDetails ? (
+          <h2>Document Details</h2>
+          {aadhar && aadhar.label ? (
             <div className="cv-details">
               <div className="cv-details-content">
-                <CvDetails />
+                <h3>Document Information</h3>
+                <div className="detail-row">
+                  {/* <span className="detail-label">Label:</span> */}
+                  <span className="detail-value">{aadhar.label}</span>
+                </div>
               </div>
             </div>
           ) : (
             <div className="no-cv-message">
-              <p>Upload a CV to see details here</p>
+              <p>Upload a document to see details here</p>
             </div>
           )}
         </div>
@@ -98,4 +110,4 @@ function Service() {
   );
 }
 
-export default Service;
+export default ServiceTwo;

@@ -276,8 +276,9 @@
 }
 
 .certification-item {
+  display: grid;
   padding: 1rem;
-  border-bottom: 1px dashed var(--border-color);
+  border-bottom: 2px dashed black;
   transition: all 0.3s ease;
 }
 

@@ -8,6 +8,7 @@ import ServiceThree from './component/service/CvChatgpt/ServiceThree.jsx'
 import './App.css'
 import Extraction from './component/service/DocumentExtraction/Extraction.jsx'
 import Analyser from './component/service/DocumentAnalyser/Analyser.jsx'
+import CvScorer from './component/service/Cvscorer/CvScorer.jsx'
 
 const routes=[
   {
@@ -37,6 +38,10 @@ const routes=[
   {
     path:"/api/service5",
     element:<Analyser/>
+  },
+  {
+    path:"/api/service6",
+    element:<CvScorer/>
   },
 ]
 

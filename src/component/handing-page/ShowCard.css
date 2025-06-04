@@ -4,6 +4,73 @@
   padding: 2rem;
 }
 
+.header-section {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  gap: 1rem;
+}
+
+.logo-icon {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brain-icon {
+  font-size: 2.5rem;
+  color: #4a90e2;
+  position: absolute;
+  animation: pulse 2s infinite;
+}
+
+.file-icon {
+  font-size: 1.8rem;
+  color: #357abd;
+  position: absolute;
+  transform: translate(8px, 8px);
+}
+
+.logo-text {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+}
+
+.container h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.service-description {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
 .card-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -91,10 +158,40 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 1024px) {
   .card-row {
     grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .container h1 {
+    font-size: 2.2rem;
   }
 }
 
@@ -107,9 +204,23 @@
     padding: 1rem;
   }
   
-  .service-icon {
+  .container h1 {
+    font-size: 1.8rem;
+  }
+  
+  .logo-text {
     font-size: 2rem;
-    height: 60px;
-    width: 60px;
+  }
+  
+  .brain-icon {
+    font-size: 2rem;
+  }
+  
+  .file-icon {
+    font-size: 1.5rem;
+  }
+  
+  .service-description {
+    font-size: 1rem;
   }
 }

@@ -12,6 +12,20 @@ function Extraction() {
   const [isLoading, setIsLoading] = useState(false);
   const [document, setDocument] = useState(null);
 
+  const supportedFiles = [
+    // { type: "PDF" },
+    // { type: "DOC" },
+    // { type: "DOCX" },
+    // { type: "TXT" },
+    { type: "JPEG" },
+    { type: "JPG" },
+    { type: "PNG" },
+    // { type: "RTF" },
+    // { type: "CSV" },
+    // { type: "XLSX" },
+    // { type: "XLS" }
+  ];
+
   const handleUpload = async (event) => {
     setFile(event.target.files[0]);
   };
@@ -104,6 +118,17 @@ function Extraction() {
               >
                 {isLoading ? "Processing..." : "Extract Document"}
               </button>
+              <div className="supported-files">
+                <h4>Supported File Types</h4>
+                <div className="file-types-grid">
+                  {supportedFiles.map((file, index) => (
+                    <div key={index} className="file-type-item">
+                      
+                      <span className="file-extension">.{file.type}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -64,14 +64,14 @@ function Analyser() {
           <div className="upload-card">
             <div className="upload-content">
               <div className="document-icon">
-                <div className="custom-document-icon">
+               <div className="custom-document-icon">
                   <div className="document-page"></div>
                   <div className="document-lines">
                     <div className="line"></div>
                     <div className="line"></div>
                     <div className="line"></div>
                   </div>
-                </div>
+                </div> 
               </div>
               <div className="select-container">
                 <label htmlFor="document-type" className="select-label">

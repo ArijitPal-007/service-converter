@@ -9,6 +9,7 @@ import './App.css'
 import Extraction from './component/service/DocumentExtraction/Extraction.jsx'
 import Analyser from './component/service/DocumentAnalyser/Analyser.jsx'
 import CvScorer from './component/service/Cvscorer/CvScorer.jsx'
+import AllDoc from './component/service/allDocument/AllDoc.jsx'
 
 const routes=[
   {
@@ -42,6 +43,10 @@ const routes=[
   {
     path:"/api/service6",
     element:<CvScorer/>
+  },
+  {
+    path:"/api/service7",
+    element:<AllDoc/>
   },
 ]
 

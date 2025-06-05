@@ -9,6 +9,7 @@ import classification from "../../assets/classification.png"
 import analyser from "../../assets/search.png"
 import extraction from "../../assets/extraction.png"
 import cvscorer from "../../assets/cvscorer.png"
+import text from "../../assets/text.png"
 
 const cardData = [
   {
@@ -64,7 +65,16 @@ const cardData = [
       "Automatically extract and evaluate key information from resumes. Score CVs based on skills, experience, and relevance using AI-powered analysis.",
       icon: <FaFileAlt />,
       route: "/api/service6",
-  }
+  },
+  {
+    id: 7,
+    title: "Document To Text",
+    image:text,
+    description:
+      "Automatically extract and evaluate key information from resumes. Score CVs based on skills, experience, and relevance using AI-powered analysis.",
+      icon: <FaFileAlt />,
+      route: "/api/service7",
+  },
   
 ];
 
